@@ -277,7 +277,7 @@ cod_mercadoria INT NOT NULL,
 Ano INT NOT NULL,
 Valor_em_mil_reais INT NOT NULL,
 PRIMARY KEY (cod_dado),
-FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun),
+FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun)
 
 );
 
