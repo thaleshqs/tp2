@@ -1,3 +1,5 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
 CREATE TABLE IF NOT EXISTS municipios_alagoas (
     cod_mun INT NOT NULL,
     Nome VARCHAR(23),
@@ -64540,5 +64542,5 @@ VALUES
 (
 9180, 2709400, 9, 2019, 0
 );
-
+COMMIT;
 
