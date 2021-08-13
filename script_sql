@@ -5,9 +5,22 @@ CREATE TABLE IF NOT EXISTS municipios_alagoas (
     Nome VARCHAR(23),
     Altitude VARCHAR(5),
     "Ano de instalação" INT,
-    `cod_clima` INT,
-    PRIMARY KEY (cod_mun)
+    cod_clima INT,
+    PRIMARY KEY (cod_mun),
+    FOREIGN KEY (cod_clima) REFERENCES clima_alagoas(cod_clima)
 );
+
+CREATE TABLE Clima_alagoas (
+    cod_clima INT,
+    Nome VARCHAR(16),
+    'Observa_o' VARCHAR(46),
+    PRIMARY KEY (cod_clima)
+);
+
+INSERT INTO Clima_alagoas VALUES
+    (1,'Tropical chuvoso','Verão seco; estação chuvosa no outono/inverno'),
+    (2,'Semiárido','Tipo estepe; estação chuvosa no outono/inverno');
+
 INSERT INTO municipios_alagoas VALUES
     (2700102,'Água Branca','570 m',1875,1),
     (2700201,'Anadia','153 m',1801,1),
