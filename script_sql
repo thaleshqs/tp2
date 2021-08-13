@@ -10,14 +10,14 @@ CREATE TABLE IF NOT EXISTS municipios_alagoas (
     FOREIGN KEY (cod_clima) REFERENCES clima_alagoas(cod_clima)
 );
 
-CREATE TABLE Clima_alagoas (
+CREATE TABLE clima_alagoas (
     cod_clima INT,
     Nome VARCHAR(16),
-    'Observa_o' VARCHAR(46),
+    'Observação' VARCHAR(46),
     PRIMARY KEY (cod_clima)
 );
 
-INSERT INTO Clima_alagoas VALUES
+INSERT INTO clima_alagoas VALUES
     (1,'Tropical chuvoso','Verão seco; estação chuvosa no outono/inverno'),
     (2,'Semiárido','Tipo estepe; estação chuvosa no outono/inverno');
 
@@ -64555,5 +64555,26 @@ VALUES
 (
 9180, 2709400, 9, 2019, 0
 );
+
+CREATE TABLE Mercadoria (
+    cod_mercadoria INT,
+    Nome VARCHAR(16),
+    Descrição VARCHAR(80),
+    PRIMARY KEY (cod_mercadoria)
+);
+INSERT INTO Mercadoria VALUES
+    (1,'Angico','Árvore de médio a grande porte usada na construção civil'),
+    (2,'Carvão Vegetal','Elemento obtido a partir da queima de madeira'),
+    (3,'Castanha-de-caju','Fruto obtido do cajueiro'),
+    (4,'Lenha','Madeira utilizada como combustível'),
+    (5,'Licuri','Palmeira bem adaptada às regiões secas e áridas da Caatinga'),
+    (6,'Madeira em tora','Madeira comercializada como porção de tronco ou pedaço de galho grosso da árvore'),
+    (7,'Mangaba ','Fruto da obtido da árvore mangabeira, típica da Caatinga'),
+    (8,'Outros','Itens diversos não especificados'),
+    (9,'Umbu','Fruto típico da região da Caatinga ');
+
+
+
+
 COMMIT;
 
