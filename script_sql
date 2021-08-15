@@ -1,10 +1,11 @@
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
+
 CREATE TABLE IF NOT EXISTS municipios_alagoas (
     cod_mun INT NOT NULL,
-    Nome VARCHAR(23),
-    Altitude VARCHAR(5),
-    "Ano de instalação" INT,
+    nome VARCHAR(23),
+    altitude VARCHAR(5),
+    "ano de instalação" INT,
     cod_clima INT,
     PRIMARY KEY (cod_mun),
     FOREIGN KEY (cod_clima) REFERENCES clima_alagoas(cod_clima)
@@ -12,10 +13,129 @@ CREATE TABLE IF NOT EXISTS municipios_alagoas (
 
 CREATE TABLE clima_alagoas (
     cod_clima INT,
-    Nome VARCHAR(16),
-    'Observação' VARCHAR(46),
+    nome VARCHAR(16),
+    Observacao VARCHAR(46),
     PRIMARY KEY (cod_clima)
 );
+
+CREATE TABLE assentamento (
+    cod_sipra VARCHAR(9) PRIMARY KEY,
+    nome VARCHAR(62) ,
+    area_hec NUMERIC(9, 4),
+    data_de_criacao DATETIME,
+    forma_obtencao VARCHAR(14) ,
+    descricao VARCHAR(28),
+    cod_mun INT NOT NULL,
+    FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun)
+);
+
+CREATE TABLE Mercadoria (
+    cod_mercadoria INT,
+    nome VARCHAR(16),
+    descricao VARCHAR(80),
+    PRIMARY KEY (cod_mercadoria)
+);
+
+/* CREATE TABLE */
+CREATE TABLE dados_extrativismo(
+cod_dado INT,
+cod_mun INT NOT NULL,
+cod_mercadoria INT NOT NULL,
+ano INT NOT NULL,
+valor_em_mil_reais INT NOT NULL,
+PRIMARY KEY (cod_dado),
+FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun)
+);
+
+CREATE TABLE universidade (
+    'cod_instituicao' INT,
+    'nome' VARCHAR(58) ,
+    'dependencia' VARCHAR(8) ,
+    'grau_de_ensino' VARCHAR(18),
+    PRIMARY KEY (cod_instituicao)
+);
+
+CREATE TABLE municipio_campus (
+    'cod_instituicao' INT,
+    'cod_mun' INT,
+    'Nome_do_campus' VARCHAR(434),
+    'bairro' VARCHAR(20),
+    FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun),
+    FOREIGN KEY (cod_instituicao) REFERENCES universidade(cod_instituicao)
+    PRIMARY KEY (cod_instituicao,cod_mun,bairro) 
+);
+
+INSERT INTO municipio_campus VALUES
+    (1,2709301,'V','Centro'),
+    (1,2708600,'IV','Fátima'),
+    (1,2708006,'II','Bebedouro'),
+    (1,2700300,'I','Alto do Cruzeiro'),
+    (1,2704302,'VI','Farol'),
+    (1,2706307,'III','Saída para Arapiraca'),
+    (2,2704302,'Maceió','Trapiche '),
+    (3,2704302,'A.C. Simões','Tabueiro dos Martins'),
+    (3,2700300,'Unidade Arapiraca','Bom Sucesso'),
+    (3,2702405,'Unidade Sertão','Cidade Universitária'),
+    (3,2706307,'Unidade  P. dos Índios ','Eucalipto'),
+    (3,2708006,'Unidade Santana do Ipanema','Monumento'),
+    (3,2706703,'Unidade Penedo ','Centro Histórico'),
+    (3,2709400,'Arapiraca','Zona Rural'),
+    (3,2707701,'Unidade Centro de Ciências Agrárias - AC Simões','Zona Rural'),
+    (4,2704302,'Maceió','Centro'),
+    (4,2704708,'Marechal Deodoro','Poeira'),
+    (4,2706307,'Palmeira dos Índios','Palmeira de Fora'),
+    (4,2708907,'Satuba','Centro'),
+    (5,2700300,'Agreste','Centro'),
+    (5,2706307,'Sertão','Centro'),
+    (5,2704302,'I - Maceió','Farol'),
+    (5,2704302,'IV - Maceió','Farol'),
+    (5,2704708,'Escola de Veterinária','Povoado Campo Grande'),
+    (5,2704302,'II - Maceió','Farol'),
+    (5,2704302,'III - Maceió','Farol'),
+    (6,2704302,'Unidade I','Jatiúca'),
+    (6,2704302,'Unidade I','Jaraguá'),
+    (7,2704302,'Maceió','Serraria'),
+    (8,2704302,'Faculdade Figueiredo Costa - FIC','Jaraguá'),
+    (9,2704302,'Maceió','Tabueiro dos Martins'),
+    (10,2704302,'Maceió','Farol'),
+    (11,2704302,'Unidade FAMA Farol                                                                                                                                                                                                                                                                                                                                                                                                                                ','Farol'),
+    (12,2704302,'Unidade I Serraria','Serraria'),
+    (12,2704302,'Unidade II Antares','Antares'),
+    (13,2704302,'Maceió','Antares'),
+    (14,2704302,'Amélia Rosa','Cruz das Almas'),
+    (15,2704302,'Farol','Farol'),
+    (15,2704302,'Unidade Mangabeiras','Mangabeiras'),
+    (15,2704302,'Maceió','Ponta Verde'),
+    (16,2704302,'Jatiúca','Jatiúca'),
+    (16,2704302,'Jaraguá','Jaraguá'),
+    (17,2700300,'Arapiraca','Alto do Cruzeiro'),
+    (18,2706307,'Palmeira dos Índios','São Francisco'),
+    (19,2706406,'Pão de Açúcar','Centro'),
+    (20,2704302,'Maceió','Petrópolis'),
+    (20,2706703,'Penedo','Centro');
+
+
+INSERT INTO faculdade VALUES
+    (1,'Universidade Estadual de Alagoas - UNEAL','Estadual','Superior'),
+    (2,'Universidade Estadual de Ciências da Saúde de Alagoas','Estadual','Superior'),
+    (3,'Universidade Federal de Alagoas','Federal','Superior'),
+    (4,'Instituto Federal de Alagoas - IFAL','Federal','Superior e Técnico'),
+    (5,'Centro de Estudos Superiores de Maceió ','Privada','Superior'),
+    (6,'nstituto de Ensino Superior de Alagoas - FAA IESA','Privada','Superior'),
+    (7,'Instituto Batista de Ensino Superior de Alagoas - IBESA','Privada','Superior'),
+    (8,'União de Faculdades de Alagoas - UNIFAL','Privada','Superior'),
+    (9,'Faculdade da cidade de Maceió - FACIMA','Privada','Superior'),
+    (10,'Faculdade de Ciências Contábeis Maceió - SEUNE','Privada','Superior'),
+    (11,'Faculdade de Ciências Jurídicas e Sociais de Maceió - FAMA','Privada','Superior'),
+    (12,'Faculdade de Tecnologia de Alagoas - FAT','Privada','Superior'),
+    (13,'Faculdade Pitágoras','Privada','Superior'),
+    (14,'Universidade Tiradentes - Unit','Privada','Superior'),
+    (15,'Centro Universitário Mauríssio de Nassau - UNINASSAU','Privada','Superior'),
+    (16,'Faculdade de Alagoas (Estácio de Sá) - FAL','Privada','Superior'),
+    (17,'Instituto de Ensino Superior Santa Cecília - IESC','Privada','Superior'),
+    (18,'Faculdade São Tomás de Aquino - FACESTA','Privada','Superior'),
+    (19,'Faculdade Integrada São Vicente','Privada','Superior'),
+    (20,'Faculdade Raimundo Marinho','Privada','Superior');
 
 INSERT INTO clima_alagoas VALUES
     (1,'Tropical chuvoso','Verão seco; estação chuvosa no outono/inverno'),
@@ -127,16 +247,7 @@ INSERT INTO municipios_alagoas VALUES
 
 
 
-CREATE TABLE assentamento (
-    cod_sipra VARCHAR(9) PRIMARY KEY,
-    nome VARCHAR(62) ,
-    area_hec NUMERIC(9, 4),
-    data_de_criacao DATETIME,
-    forma_obtencao VARCHAR(14) ,
-    descricao VARCHAR(28),
-    cod_mun INT NOT NULL,
-    FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun)
-);
+
 INSERT INTO assentamento VALUES
     ('AL0194000','PA FLOR DO BOSQUE',350.8,'2007-11-27 00:00:00','Doação','Assentamento Criado',2705200),
     ('AL0211000','PA PADRE CÍCERO/BOQUEIRÃO/SANTA TEREZA/BELA VISTA/BELA VISTA I',214.9019,'2008-12-30 00:00:00','Compra e Venda','Assentamento Criado',2700409),
@@ -284,17 +395,7 @@ INSERT INTO assentamento VALUES
 
 /* Showing results for Book 2 (1).xlsx */
 
-/* CREATE TABLE */
-CREATE TABLE dados_extrativismo(
-cod_dado INT,
-cod_mun INT NOT NULL,
-cod_mercadoria INT NOT NULL,
-Ano INT NOT NULL,
-Valor_em_mil_reais INT NOT NULL,
-PRIMARY KEY (cod_dado),
-FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun)
 
-);
 
 /* INSERT QUERY NO: 1 */
 INSERT INTO dados_extrativismo(cod_dado, cod_mun, cod_mercadoria, Ano, Valor_em_mil_reais)
@@ -64556,12 +64657,7 @@ VALUES
 9180, 2709400, 9, 2019, 0
 );
 
-CREATE TABLE Mercadoria (
-    cod_mercadoria INT,
-    Nome VARCHAR(16),
-    Descrição VARCHAR(80),
-    PRIMARY KEY (cod_mercadoria)
-);
+
 INSERT INTO Mercadoria VALUES
     (1,'Angico','Árvore de médio a grande porte usada na construção civil'),
     (2,'Carvão Vegetal','Elemento obtido a partir da queima de madeira'),
