@@ -58,11 +58,11 @@ CREATE TABLE universidade (
 CREATE TABLE municipio_campus (
     'cod_instituicao' INT,
     'cod_mun' INT,
-    'Nome_do_campus' VARCHAR(434),
+    'nome_do_campus' VARCHAR(434),
     'bairro' VARCHAR(20),
     FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun),
     FOREIGN KEY (cod_instituicao) REFERENCES universidade(cod_instituicao)
-    PRIMARY KEY (cod_instituicao,cod_mun,bairro) 
+    PRIMARY KEY (cod_instituicao,cod_mun,nome_do_campus, bairro) 
 );
 
 INSERT INTO municipio_campus VALUES
