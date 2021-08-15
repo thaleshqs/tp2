@@ -2,67 +2,66 @@ PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
 
 CREATE TABLE IF NOT EXISTS municipios_alagoas (
-    cod_mun INT NOT NULL,
-    nome VARCHAR(23),
-    altitude VARCHAR(5),
-    "ano de instalação" INT,
-    cod_clima INT,
-    PRIMARY KEY (cod_mun),
-    FOREIGN KEY (cod_clima) REFERENCES clima_alagoas(cod_clima)
+    	cod_mun INT NOT NULL,
+    	nome VARCHAR(23),
+    	altitude VARCHAR(5),
+    	"ano de instalação" INT,
+    	cod_clima INT,
+    	PRIMARY KEY (cod_mun),
+    	FOREIGN KEY (cod_clima) REFERENCES clima_alagoas(cod_clima)
 );
 
 CREATE TABLE clima_alagoas (
-    cod_clima INT,
-    nome VARCHAR(16),
-    Observacao VARCHAR(46),
-    PRIMARY KEY (cod_clima)
+    	cod_clima INT,
+    	nome VARCHAR(16),
+    	Observacao VARCHAR(46),
+    	PRIMARY KEY (cod_clima)
 );
 
 CREATE TABLE assentamento (
-    cod_sipra VARCHAR(9) PRIMARY KEY,
-    nome VARCHAR(62) ,
-    area_hec NUMERIC(9, 4),
-    data_de_criacao DATETIME,
-    forma_obtencao VARCHAR(14) ,
-    descricao VARCHAR(28),
-    cod_mun INT NOT NULL,
-    FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun)
+    	cod_sipra VARCHAR(9) PRIMARY KEY,
+    	nome VARCHAR(62) ,
+    	area_hec NUMERIC(9, 4),
+    	data_de_criacao DATETIME,
+    	forma_obtencao VARCHAR(14) ,
+    	descricao VARCHAR(28),
+    	cod_mun INT NOT NULL,
+    	FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun)
 );
 
 CREATE TABLE Mercadoria (
-    cod_mercadoria INT,
-    nome VARCHAR(16),
-    descricao VARCHAR(80),
-    PRIMARY KEY (cod_mercadoria)
+    	cod_mercadoria INT,
+    	nome VARCHAR(16),
+    	descricao VARCHAR(80),
+    	PRIMARY KEY (cod_mercadoria)
 );
 
-/* CREATE TABLE */
 CREATE TABLE dados_extrativismo(
-cod_dado INT,
-cod_mun INT NOT NULL,
-cod_mercadoria INT NOT NULL,
-ano INT NOT NULL,
-valor_em_mil_reais INT NOT NULL,
-PRIMARY KEY (cod_dado),
-FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun)
+	cod_dado INT,
+	cod_mun INT NOT NULL,
+	cod_mercadoria INT NOT NULL,
+	ano INT NOT NULL,
+	valor_em_mil_reais INT NOT NULL,
+	PRIMARY KEY (cod_dado),
+	FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun)
 );
 
 CREATE TABLE universidade (
-    'cod_instituicao' INT,
-    'nome' VARCHAR(58) ,
-    'dependencia' VARCHAR(8) ,
-    'grau_de_ensino' VARCHAR(18),
-    PRIMARY KEY (cod_instituicao)
+    	'cod_instituicao' INT,
+    	'nome' VARCHAR(58) ,
+    	'dependencia' VARCHAR(8) ,
+    	'grau_de_ensino' VARCHAR(18),
+    	PRIMARY KEY (cod_instituicao)
 );
 
 CREATE TABLE municipio_campus (
-    'cod_instituicao' INT,
-    'cod_mun' INT,
-    'nome_do_campus' VARCHAR(434),
-    'bairro' VARCHAR(20),
-    FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun),
-    FOREIGN KEY (cod_instituicao) REFERENCES universidade(cod_instituicao)
-    PRIMARY KEY (cod_instituicao,cod_mun,nome_do_campus, bairro) 
+    	'cod_instituicao' INT,
+    	'cod_mun' INT,
+    	'nome_do_campus' VARCHAR(434),
+   	'bairro' VARCHAR(20),
+    	FOREIGN KEY (cod_mun) REFERENCES municipios_alagoas(cod_mun),
+    	FOREIGN KEY (cod_instituicao) REFERENCES universidade(cod_instituicao)
+    	PRIMARY KEY (cod_instituicao,cod_mun,nome_do_campus, bairro) 
 );
 
 INSERT INTO municipio_campus VALUES
@@ -98,7 +97,7 @@ INSERT INTO municipio_campus VALUES
     (8,2704302,'Faculdade Figueiredo Costa - FIC','Jaraguá'),
     (9,2704302,'Maceió','Tabueiro dos Martins'),
     (10,2704302,'Maceió','Farol'),
-    (11,2704302,'Unidade FAMA Farol                                                                                                                                                                                                                                                                                                                                                                                                                                ','Farol'),
+    (11,2704302,'Unidade FAMA Farol','Farol'),
     (12,2704302,'Unidade I Serraria','Serraria'),
     (12,2704302,'Unidade II Antares','Antares'),
     (13,2704302,'Maceió','Antares'),
@@ -115,7 +114,7 @@ INSERT INTO municipio_campus VALUES
     (20,2706703,'Penedo','Centro');
 
 
-INSERT INTO faculdade VALUES
+INSERT INTO universidade VALUES
     (1,'Universidade Estadual de Alagoas - UNEAL','Estadual','Superior'),
     (2,'Universidade Estadual de Ciências da Saúde de Alagoas','Estadual','Superior'),
     (3,'Universidade Federal de Alagoas','Federal','Superior'),
